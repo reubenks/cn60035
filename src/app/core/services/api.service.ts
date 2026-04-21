@@ -7,13 +7,14 @@ import { Card } from '../models/card';
 import { PinataService } from './pinata.service';
 import { SnackBarService } from './snack-bar.service';
 import { WalletService } from './wallet.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  constructor(private snackBarService: SnackBarService, private spinner: NgxSpinnerService, private http: HttpClient, private pinataService: PinataService, public walletService: WalletService) { }
+  constructor(private snackBarService: SnackBarService, private spinner: NgxSpinnerService, private http: HttpClient, private pinataService: PinataService, public walletService: WalletService, private router: Router) { }
 
 
 
@@ -34,6 +35,8 @@ export class ApiService {
       },
       complete: () => {
         console.log("Completed");
+        // sends them to create a new card again
+        this.router.navigate(['/all-cards'])
       },
     });
 
