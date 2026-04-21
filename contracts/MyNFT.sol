@@ -179,6 +179,9 @@ contract NFTMarketplace is ERC721URIStorage {
             "Please submit the asking price in order to complete the purchase"
         );
 
+        // prevent a person from buying their own pokemon CARD
+        require(idToListedToken[tokenId].seller != msg.sender , "You cant buy your own card");
+
         //update the details of the token
         idToListedToken[tokenId].currentlyListed = true;
         idToListedToken[tokenId].seller = payable(msg.sender);
