@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilsService } from 'src/app/core/services/utils.service';
 import { WalletService } from 'src/app/core/services/wallet.service';
+import { Location } from '@angular/common';
 
 @Component({
   templateUrl: './card-detail.component.html',
@@ -10,7 +11,12 @@ export class CardDetailComponent implements OnInit {
 
   ethPrice: string = "";
   eurPrice: string = "";
-  constructor(public wallet: WalletService, private utilsService: UtilsService) { }
+  constructor(public wallet: WalletService, private utilsService: UtilsService, private location: Location) { }
+
+  // add back functionality
+  Back() {
+    this.location.back()
+  }
 
   ngOnInit(): void {
     this.parsePriceToEther(this.wallet.cardDetail.price);
