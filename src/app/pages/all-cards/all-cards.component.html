@@ -1,5 +1,38 @@
+<!-- addings filtering and search -->
+<input type = "text" [(ngModel)]="Search" placeholder="Search...">
+
+<!-- searched by energies -->
+<select [(ngModel)]="Energy">
+  <option value="all">all types</option>
+  <option value="Fire">Fire</option>
+  <option value="Fighting">Fighting</option>
+  <option value="Lightning">Lightning</option>
+  <option value="Grass">Grass</option>
+  <option value="Water">Water</option>
+  <option value="Psychic">Psychicx</option>
+  <option value="Darkness">Darkness</option>
+  <option value="Metal">Metal</option>
+  <option value="Colorless">Colorless</option>
+</select>
+<!-- search by rarities -->
+<select [(ngModel)]="Rarity">
+  <option value="all">all types</option>
+  <option value="Common">Common</option>
+  <option value="Uncommon">Uncoomon</option>
+  <option value="Rare">Rare</option>
+  <option value="Promo">Promo</option>
+</select>
+
+<!-- search by highest or lowest price -->
+<select [(ngModel)]="Sort">
+  <option value="none">sort by price</option>
+  <option value="highest_price">Sort by highest price </option>
+  <option value="lowest_price">sort by lowest price</option>
+</select>
+
+
 <div class="cards-main-container">
-  <ng-container *ngFor="let card of wallet.allNfts">
+  <ng-container *ngFor="let card of filteredCards()">
     <ng-container *ngIf="card.weight">
       <poke-card
         [pokemon]="card"
