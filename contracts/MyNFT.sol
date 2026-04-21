@@ -41,6 +41,8 @@ contract NFTMarketplace is ERC721URIStorage {
     // stores creation date for card
     mapping(uint256 => uint256) public dateMinted;
 
+    mapping(address => uint256) public lastMint;
+
     constructor() ERC721("NFTCardMarketplace", "CARD") {
         owner = payable(msg.sender);
     }
@@ -81,6 +83,11 @@ contract NFTMarketplace is ERC721URIStorage {
         payable
         returns (uint256)
     {
+        // requires 10 seconds has passed since last mint
+        require(block.timestamp - lastMint[msg.sender] >= 20, "You must wait before minting another NFT");
+        lastMint[msg.sender]= block.timestamp;
+
+
         //Increment the tokenId counter, which is keeping track of the number of minted NFTs
         _tokenIds.increment();
         uint256 newTokenId = _tokenIds.current();
