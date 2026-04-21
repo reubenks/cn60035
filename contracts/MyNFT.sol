@@ -38,6 +38,9 @@ contract NFTMarketplace is ERC721URIStorage {
     //This mapping maps tokenId to token info and is helpful when retrieving details about a tokenId
     mapping(uint256 => ListedToken) private idToListedToken;
 
+    // stores creation date for card
+    mapping(uint256 => uint256) public dateMinted;
+
     constructor() ERC721("NFTCardMarketplace", "CARD") {
         owner = payable(msg.sender);
     }
@@ -84,6 +87,9 @@ contract NFTMarketplace is ERC721URIStorage {
 
         //Mint the NFT with tokenId newTokenId to the address who called createToken
         _safeMint(msg.sender, newTokenId);
+
+        // saves date
+        dateMinted[newTokenId]= block.timestamp;
 
         //Map the tokenId to the tokenURI (which is an IPFS URL with the NFT metadata)
         _setTokenURI(newTokenId, tokenURI);

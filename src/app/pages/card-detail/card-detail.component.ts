@@ -12,6 +12,9 @@ export class CardDetailComponent implements OnInit {
 
   ethPrice: string = "";
   eurPrice: string = "";
+  // saves minted date
+  dateMinted: string =""
+
   constructor(public wallet: WalletService, private utilsService: UtilsService, private location: Location, private favService: FavouritesService) { }
 
   // add back functionality
@@ -32,6 +35,11 @@ export class CardDetailComponent implements OnInit {
     this.utilsService.getEurFromEth().subscribe((data: any) => {
       this.eurPrice = (data.EUR * parseFloat(this.ethPrice)).toString();
     });
+    // grab when it was minted and convert the time
+    this.wallet.nftContract.methods.dateMinted(this.wallet.cardDetail.tokenId).call().then((timestamp: any) => {
+            this.dateMinted = new Date(timestamp * 1000).toLocaleDateString()
+    })
+
   }
 
   buyCard() {

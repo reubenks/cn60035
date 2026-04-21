@@ -16,6 +16,9 @@
         {{ (card.seller | slice : 0 : 4) + "..." + (card.seller | slice : -4) }}
       </strong>
     </h2>
+    <h2>
+      Date Minted: {{ dateMinted }}
+    </h2>
 
     <button
       *ngIf="
