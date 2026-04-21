@@ -49,5 +49,9 @@ export class MyProfileComponent implements OnInit {
     this.router.navigate([`/card-detail`]);
   }
 
+  // removes the nft from the market
+  delistCard(card: Card) {
+    this.wallet.nftContract.methods.delistToken(card.tokenId).send({from: this.wallet.walletAddress}).then((response: any) => {this.refreshMyNfts()})
+  }
 
 }

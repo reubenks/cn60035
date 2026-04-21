@@ -130,9 +130,12 @@ contract NFTMarketplace is ERC721URIStorage {
         //filter out currentlyListed == false over here
         for (uint256 i = 0; i < nftCount; i++) {
             currentId = i + 1;
-            ListedToken storage currentItem = idToListedToken[currentId];
-            tokens[currentIndex] = currentItem;
-            currentIndex += 1;
+            // only add if its still listed
+            if (idToListedToken[currentId].currentlyListed == true) {
+                ListedToken storage currentItem = idToListedToken[currentId];
+                tokens[currentIndex] = currentItem;
+                currentIndex += 1;
+            }
         }
         //the array 'tokens' has the list of all NFTs in the marketplace
         return tokens;
@@ -196,5 +199,20 @@ contract NFTMarketplace is ERC721URIStorage {
         payable(owner).transfer(listPrice);
         //Transfer the proceeds from the sale to the seller of the NFT
         payable(seller).transfer(msg.value);
+    }
+
+    // allows people to delist their card
+    function delistToken(uint256 tokenId) public {
+        //checks owner
+        require(idToListedToken[tokenId].seller == msg.sender, "you arent the owner");
+        //checks if card has already been delisted
+        require(idToListedToken[tokenId].currentlyListed == true, "Card isnt listed");
+
+        // sets it to false
+        idToListedToken[tokenId].currentlyListed = false;
+        idToListedToken[tokenId].owner = payable(msg.sender);
+
+        // send card back to seller
+        _transfer(address(this), msg.sender, tokenId);
     }
 }
