@@ -17,6 +17,8 @@ import { SnackBarService } from './snack-bar.service';
 import { Card } from '../models/card';
 import { CardComponent } from 'src/app/shared/card/card.component';
 
+// TEST COMMENT
+
 @Injectable({
   providedIn: 'root',
 })
@@ -182,7 +184,7 @@ export class WalletService {
   public async mintNFT(tokenURI: string, inputPrice: number) {
     const isWalletConnected = await this.checkWalletConnection();
     if (!isWalletConnected) return;
-    const nonce = await this.web3Instance.eth.getTransactionCount(this.contractInfo.contractAddress, 'latest'); //get latest nonce
+    // const nonce = await this.web3Instance.eth.getTransactionCount(this.contractInfo.contractAddress, 'latest'); //get latest nonce
 
     //const inputPrice: number = 0.02;
     const price = this.web3Instance.utils.toWei(inputPrice.toString(), 'ether');
@@ -200,7 +202,7 @@ export class WalletService {
     const tx = {
       from: this.walletAddress,
       to: this.contractInfo.contractAddress,
-      nonce: nonce,
+      // nonce: nonce,
       gas: 500000,
       data: this.nftContract.methods.createToken(tokenURI, priceBN).encodeABI(),
       value: feePrice,
@@ -228,11 +230,11 @@ export class WalletService {
     if (window.ethereum) {
       console.log('Metamask is installed!');
       const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-      if (chainId !== '0x5') {
+      if (chainId !== '0x7A69') {
         console.log('Incorrect network! Trying to switch your metamask network to Goerli');
         await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x5' }],
+          params: [{ chainId: '0x7A69' }],
         });
       }
       const connection = await window.ethereum.request({ method: 'eth_requestAccounts' })
