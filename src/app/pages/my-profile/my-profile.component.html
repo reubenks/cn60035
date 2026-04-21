@@ -33,6 +33,16 @@
       ></poke-card>
       <!-- adds button to remove from market -->
       <button (click)="delistCard(card)">Remove from market</button>
+      <!-- adds button to set new price -->
+      <button (click)="card2 = card">update card price</button>
+
+      <div *ngIf = "card2?.tokenId == card.tokenId">
+        <input type="number" [(ngModel)] = "price2" placeholder="New ETH price">
+        <button (click)="updatePrice(card)">Proceed</button>
+        <button (click)="card2=null">Cancel</button>
+
+      </div>
+
     </ng-container>
   </ng-container>
 </div>

@@ -215,4 +215,13 @@ contract NFTMarketplace is ERC721URIStorage {
         // send card back to seller
         _transfer(address(this), msg.sender, tokenId);
     }
+
+    // allows seller to update card price
+    function updatePrice(uint256 tokenId, uint256 price2) public {
+        //checks owner
+        require(idToListedToken[tokenId].seller == msg.sender, "you do not own this card");
+        // updates price
+        idToListedToken[tokenId].price=price2;
+    }
+
 }
