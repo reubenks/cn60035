@@ -1,0 +1,13 @@
+await nft.createToken("ipfs://QmZ6EVtSPjGpA7oQnfKXmHYELBasdj6CezKxMzS9wJKzqo", ethers.utils.parseEther("0.02"), {value: fee})
+await nft.createToken("ipfs://QmT6ruDBvGoMEU6QSF4rLyozUdjww3e2RdrxgWwQ8HcWLj", ethers.utils.parseEther("0.02"), {value: fee})
+await nft.createToken("ipfs://QmeTjtJ2BHHS62KTrKYKGTdNhPdh38sGenhz7PFRSug6SG", ethers.utils.parseEther("0.02"), {value: fee})
+const fee = await nft.getListPrice()
+const nft = await contract.attach("0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9")
+const contract = await ethers.getContractFactory("NFTMarketplace")
+npm start
+await nft.createToken("ipfs://QmZ6EVtSPjGpA7oQnfKXmHYELBasdj6CezKxMzS9wJKzqo", ethers.utils.parseEther("0.02"), {value: fee})
+await nft.createToken("ipfs://QmT6ruDBvGoMEU6QSF4rLyozUdjww3e2RdrxgWwQ8HcWLj", ethers.utils.parseEther("0.02"), {value: fee})
+await nft.createToken("ipfs://QmeTjtJ2BHHS62KTrKYKGTdNhPdh38sGenhz7PFRSug6SG", ethers.utils.parseEther("0.02"), {value: fee})
+const fee = await nft.getListPrice()
+const nft = await contract.attach("0x5FbDB2315678afecb367f032d93F642f64180aa3")
+const contract = await ethers.getContractFactory("NFTMarketplace")

@@ -180,7 +180,7 @@ export class WalletService {
     }
     return true;
   }
-
+  // removed noncing
   public async mintNFT(tokenURI: string, inputPrice: number) {
     const isWalletConnected = await this.checkWalletConnection();
     if (!isWalletConnected) return;
@@ -225,7 +225,7 @@ export class WalletService {
       });
   }
 
-
+// changed chainID from Goerli to my local hardhat network for testing
   async connect() {
     if (window.ethereum) {
       console.log('Metamask is installed!');
