@@ -32,6 +32,11 @@
     <ng-template #alreadyOwner
       ><h2>You are the owner of this card!</h2></ng-template
     >
+    <!-- adds favourite button -->
+     <button (click) = "favouritesToggle()">
+      {{ favourited() ? 'Unfavourite' : 'Favourite'}}
+     </button>
+
   </div>
 
   <div id="card-preview">

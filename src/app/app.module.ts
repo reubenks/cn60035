@@ -30,6 +30,7 @@ import { AllCardsComponent } from './pages/all-cards/all-cards.component';
 import { CardDetailComponent } from './pages/card-detail/card-detail.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { Favourites2 } from './pages/favourites/favourites.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MatListModule } from '@angular/material/list';
     MyProfileComponent,
     AllCardsComponent,
     CardDetailComponent,
+    Favourites2,
   ],
   imports: [
     BrowserModule,
