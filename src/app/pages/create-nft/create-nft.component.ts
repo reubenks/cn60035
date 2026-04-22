@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { Card, Attack, Energy } from 'src/app/core/models/card';
 import { AnyForUntypedForms } from '@angular/forms';
 import { runInThisContext } from 'vm';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -26,8 +27,10 @@ export class CreateNftComponent implements OnInit {
   step = 0;
   price: string = "0.02";
 
+  pokeName: string = ""
 
-  constructor(private apiService: ApiService) {
+
+  constructor(private apiService: ApiService, private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -177,6 +180,17 @@ export class CreateNftComponent implements OnInit {
     this.customCard.level = Number(this.customCard.level);
     const price = Number(this.price);
     this.apiService.loadCardToIPFS(this.customCard, price);
+  }
+
+  //calls my new backend to actually fill in the card details
+  autofill() {
+    this.http.get(`http://localhost:3000/api/pokemon?name=${this.pokeName}`).subscribe((data: any) => {
+      this.customCard.name = data.pokemonname
+      this.customCard.hp = data.hp
+      this.customCard.length = data.length
+      this.customCard.weight = data.weight
+      this.customCard.energy_type = data.energy2
+    })
   }
 
 }
