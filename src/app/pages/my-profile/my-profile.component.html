@@ -25,6 +25,7 @@
 <div class="cards-main-container" *ngIf="wallet.walletAddress">
   <ng-container *ngFor="let card of wallet.myNfts">
     <ng-container *ngIf="card.weight">
+      <div style="display: flex; flex-direction: column; align-items: center;">
       <poke-card
         [pokemon]="card"
         mode="display"
@@ -42,7 +43,7 @@
         <button (click)="card2=null">Cancel</button>
 
       </div>
-
+      </div>
     </ng-container>
   </ng-container>
 </div>
